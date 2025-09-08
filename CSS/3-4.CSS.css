@@ -32,6 +32,10 @@ header {
   display: none;
 }
 
+.header_menu-sp-nav {
+  display: none;
+}
+
 .header-bottom {
   display: flex;
   justify-content: center;
