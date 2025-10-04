@@ -1,0 +1,12 @@
+sql_education=# select name, count(*) as "全注文中、各製品がいくつ注文されたか" from order_item as oi inner join item as i on oi.item_id = i.item_id group by name order by count(*) desc;
+      name      | 全注文中、各製品がいくつ注文されたか
+----------------+--------------------------------------
+ ラップラーメン |                                    4
+ 卵             |                                    2
+ 食パン         |                                    2
+ バナナ         |                                    2
+ 米             |                                    2
+ 牛乳           |                                    1
+ キャベツ       |                                    1
+ にんじん       |                                    1
+(8 行)
