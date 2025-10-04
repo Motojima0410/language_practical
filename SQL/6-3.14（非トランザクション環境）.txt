@@ -1,0 +1,7 @@
+postgres=# select * from account;
+ account_id | name
+------------+------
+          1 | ac1
+          2 | ac2
+(2 行)
+

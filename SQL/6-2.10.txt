@@ -1,0 +1,6 @@
+sql_education=# select order_id as "キャベツまたはにんじんが含まれる注文のid" from order_item as oi inner join item as i on oi.item_id = i.item_id where i.name in ('キャベツ', 'にんじん');
+ キャベツまたはにんじんが含まれる注文のid
+------------------------------------------
+                                        2
+                                        5
+(2 行)

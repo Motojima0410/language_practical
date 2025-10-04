@@ -1,0 +1,9 @@
+sql_education=# select order_id, sum(oi.quantity * i.price) as "各注文ごとの合計金額" from order_item as oi inner join item as i on oi.item_id = i.item_id group by order_id order by "各注文ごとの合計金額" desc;
+ order_id | 各注文ごとの合計金額
+----------+----------------------
+        5 |                 5356
+        3 |                 3860
+        4 |                 2834
+        1 |                 2612
+        2 |                 2170
+(5 行)
