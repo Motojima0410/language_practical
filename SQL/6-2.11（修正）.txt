@@ -1,0 +1,19 @@
+sql_education=# select
+sql_education-#  i.name as "製品名", sum(oi.quantity) as "注文合計数"
+sql_education-# from
+sql_education-#  order_item as oi inner join item as i on oi.item_id = i.item_id
+sql_education-# group by
+sql_education-#  i.name
+sql_education-# order by
+sql_education-#  "注文合計数" desc;
+     製品名     | 注文合計数
+----------------+------------
+ 卵             |         20
+ ラップラーメン |         14
+ 食パン         |          7
+ バナナ         |          7
+ キャベツ       |          5
+ にんじん       |          4
+ 米             |          3
+ 牛乳           |          2
+(8 行)

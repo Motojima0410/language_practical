@@ -1,0 +1,5 @@
+sql_education=# select count(*) as "2024年にされた注文の総数" from order_info where order_date >= '2024-01-01' and order_date < '2025-01-01';
+ 2024年にされた注文の総数
+--------------------------
+                        2
+(1 行)
