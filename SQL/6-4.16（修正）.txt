@@ -1,0 +1,82 @@
+今回の要件は、「注文のキャンセルができるようにする」というものです。
+この要件を満たすために、既存のテーブルに下記カラムを追加します。
+
+
+カラムを追加するテーブル　　　追加する内容　　　　　追加するカラム名　　　　入力する内容
+
+order_info　　　　　　　　　　キャンセルフラグ　　　　is_canceled　　　　　　注文自体がキャンセルされたかどうかを入力します。
+order_item　　　　　　　　　　キャンセルフラグ      　is_canceled     　 　  商品がキャンセルされたかどうかを入力します。
+
+これにより、注文のキャンセル後も履歴を確認することができ、正確な金額の計算も可能になります。
+また、注文自体と商品ごとのフラグを分けることで、注文全体のキャンセルと商品単位の部分キャンセルの両方に対応できます。
+
+
+
+SQLの解説
+
+キャンセルフラグ：
+注文自体がキャンセルされた場合と、特定の商品そのもののキャンセル状況を記録するものなので、
+それぞれ、order_infoテーブル、order_itemテーブルに追加します。
+キャンセルされたかされていないかの2択しかないため、boolean型のカラムを追加します。
+既存の注文はキャンセルされていないとみなすため、default falseを設定します。
+
+
+
+SQL文
+
+キャンセルフラグの追加
+alter table order_info add column is_canceled boolean default false;
+alter table order_item add column is_canceled boolean default false;
+
+
+実行結果
+
+order_infoへのキャンセルフラグの追加
+
+sql_education=# alter table
+sql_education-#  order_info
+sql_education-# add column
+sql_education-#  is_canceled boolean
+sql_education-# default false;
+ALTER TABLE
+
+sql_education=# select * from order_info;
+ order_info_id | order_date | account_id | store_id | status_code | is_canceled
+---------------+------------+------------+----------+-------------+-------------
+             1 | 2024-12-30 |          1 |        1 |          10 | f
+             2 | 2025-01-20 |          1 |        1 |          10 | f
+             3 | 2024-12-31 |          2 |        1 |          10 | f
+             4 | 2025-01-20 |          2 |        1 |          10 | f
+             5 | 2025-04-01 |          2 |        1 |          10 | f
+(5 行)
+
+
+order_itemへのキャンセルフラグの追加
+
+sql_education=# alter table
+sql_education-#  order_item
+sql_education-# add column
+sql_education-#  is_canceled boolean
+sql_education-# default false;
+ALTER TABLE
+
+
+sql_education=# select * from order_item;
+ id | order_id | item_id | quantity | is_canceled
+----+----------+---------+----------+-------------
+  3 |        1 |       7 |        2 | f
+  4 |        1 |       9 |        1 | f
+  5 |        1 |      12 |        2 | f
+  6 |        2 |      10 |        4 | f
+  7 |        2 |      11 |        5 | f
+  8 |        2 |      12 |        6 | f
+  9 |        3 |       8 |       10 | f
+ 10 |        3 |      12 |        5 | f
+ 11 |        3 |       7 |        5 | f
+ 12 |        4 |       8 |       10 | f
+ 13 |        4 |      12 |        1 | f
+ 14 |        4 |      11 |        2 | f
+ 15 |        5 |      13 |        5 | f
+ 16 |        5 |       9 |        2 | f
+ 17 |        5 |       6 |        2 | f
+(15 行)

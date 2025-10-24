@@ -1,0 +1,34 @@
+postgres=# begin;
+BEGIN
+
+postgres=*#
+
+
+postgres=*# insert into account(name) values('ac3'),('ac4');
+INSERT 0 2
+
+
+postgres=*# select * from account;
+ account_id | name
+------------+------
+          1 | ac1
+          2 | ac2
+          5 | ac3
+          6 | ac4
+(4 行)
+
+
+
+postgres=*# commit;
+COMMIT
+
+
+
+postgres=*# select * from account;
+ account_id | name
+------------+------
+          1 | ac1
+          2 | ac2
+          5 | ac3
+          6 | ac4
+(4 行)
